@@ -7,7 +7,7 @@ export SCRIPT_HOME=$( cd "$( dirname "$0" )" &> /dev/null && pwd )
 cd $SCRIPT_HOME
 
 # Uncomment the following to prevent terminal from closing if app crashes
-#PREVENT_CLOSE="; bash -i"
+PREVENT_CLOSE="; bash -i"
 
 x-terminal-emulator -T TempSensor_i_tcp_tempSensor_App -e sh -c "linux-build/TempSensor_i_tcp_tempSensor_App${PREVENT_CLOSE}" &
 x-terminal-emulator -T TempControl_i_tcp_tempControl_App -e sh -c "linux-build/TempControl_i_tcp_tempControl_App${PREVENT_CLOSE}" &

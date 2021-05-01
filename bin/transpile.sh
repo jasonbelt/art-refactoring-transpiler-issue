@@ -26,7 +26,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --bits 64 \
   --string-size 256 \
   --sequence-size 13 \
-  --sequence "IS[Z,art.Bridge]=3;MS[Z,Option[art.Bridge]]=3;IS[Z,art.UPort]=5;IS[Z,art.UConnection]=4" \
+  --sequence "IS[Z,art.Bridge]=3;MS[Z,MOption[art.Bridge]]=3;IS[Z,art.UPort]=5;IS[Z,art.UConnection]=4" \
   --constants "art.Art.maxComponents=3;art.Art.maxPorts=13" \
   --forward "art.ArtNative=packageName_not_set.ArtNix,packageName_not_set.Platform=packageName_not_set.PlatformNix" \
   --stack-size "110592" \

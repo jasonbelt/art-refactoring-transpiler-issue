@@ -11,16 +11,16 @@ object Art {
 
   val z16max: PortId = org.sireum.conversions.Z16.toZ(Z16.Max) // 32,767
 
-  val maxComponents: BridgeId = 3
-  val maxPorts: PortId = 13
+  val maxComponents: PortId = z16max // constant set during instantiation, must be < Z32.Max
+  val maxPorts: PortId = z16max // constant set during instantiation, must be < Z32.Max
 
   val logTitle: String = "Art"
-  val bridges: MS[BridgeId, Option[Bridge]] = MS.create[BridgeId, Option[Bridge]](maxComponents, None[Bridge]())
+  val bridges: MS[BridgeId, MOption[Bridge]] = MS.create[BridgeId, MOption[Bridge]](maxComponents, MNone[Bridge]())
   val connections: MS[PortId, ISZ[PortId]] = MS.create[PortId, ISZ[PortId]](maxPorts, ISZ())
   val ports: MS[PortId, Option[UPort]] = MS.create[PortId, Option[UPort]](maxPorts, None[UPort]())
 
   def bridge(bridgeId: BridgeId): Bridge = {
-    val Some(r) = bridges(bridgeId)
+    val MSome(r) = bridges(bridgeId)
     return r
   }
 
@@ -30,7 +30,7 @@ object Art {
   }
 
   def register(bridge: Bridge): Unit = {
-    bridges(bridge.id) = Some(bridge)
+    bridges(bridge.id) = MSome(bridge)
     bridge.dispatchProtocol match {
       case DispatchPropertyProtocol.Periodic(period) =>
         ArtNative.logInfo(logTitle, s"Registered component: ${bridge.name} (periodic: $period)")
@@ -115,7 +115,7 @@ object Art {
   def initTest(bridge: Bridge): Unit = {
     // remove all bridges
     for (i <- bridges.indices) {
-      bridges(i) = None()
+      bridges(i) = MNone()
     }
 
     // remove all ports

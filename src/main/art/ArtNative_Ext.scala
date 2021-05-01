@@ -20,7 +20,7 @@ case class ArtMessage (data: DataContent,
                        // when putValue was called by producer
                        var putValueTimestamp: Z = ArtMessage.UNSET,
 
-                       // when sendOutput transferred message from out port var of producer 
+                       // when sendOutput transferred message from out port var of producer
                        var sendOutputTimestamp: Z = ArtMessage.UNSET,
 
                        // when message arrived via transport layer
@@ -149,7 +149,7 @@ object ArtNative_Ext {
     val bridges = {
       var r = Vector[Bridge]()
       for (e <- Art.bridges.elements) e match {
-        case Some(b) => r :+= b
+        case MSome(b) => r :+= b
         case _ =>
       }
       r
